@@ -1,7 +1,4 @@
-﻿using ElevatorStimulator.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ElevatorStimulator.Interfaces;
 
 namespace ElevatorStimulator
 {
