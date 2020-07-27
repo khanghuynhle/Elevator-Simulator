@@ -29,7 +29,7 @@ namespace ElevatorSimulator
 
 				foreach (Elevator elevatorStatus in _elevator.ElevatorRandomisedStatus)
 				{
-					Console.WriteLine($"There are {elevatorStatus.NumberOfCurrentPeopleInElevator} people in elevator {elevatorStatus.ElevatorNumber} going Up at floor {elevatorStatus.CurrentElevatorFloor}");
+					Console.WriteLine($"There are {elevatorStatus.NumberOfCurrentPeopleInElevator} people in elevator number {elevatorStatus.ElevatorNumber} going Up at floor {elevatorStatus.CurrentElevatorFloor}");
 				}
 		}
 	}

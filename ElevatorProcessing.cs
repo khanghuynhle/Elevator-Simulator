@@ -17,6 +17,11 @@ namespace ElevatorSimulator
 		}
 		public void CallElevator()
 		{
+			while (!Enumerable.Range(0, _floor.BuilddingFloor).Contains(_floor.TargetFloor))
+			{
+				Console.Write("Please re-enter the destination floor: ");
+				_floor.TargetFloor = Convert.ToInt32(Console.ReadLine());
+			}
 			//Pre check with the direction
 			if (_floor.CurrentUserFloor > _floor.TargetFloor)
 			{
@@ -33,7 +38,6 @@ namespace ElevatorSimulator
 				return;
 			}
 			ElevatorLogic();
-
 		}
 		public void ElevatorLogic()
 		{
@@ -66,11 +70,15 @@ namespace ElevatorSimulator
 						}
 						else
 						{
+							elevatorFloorSorted.OrderBy(elevator => elevator.CurrentElevatorFloor);
 							Console.WriteLine($"Please go to elevator number {elevatorStatus.ElevatorNumber} which has {elevatorStatus.NumberOfCurrentPeopleInElevator} people at floor {elevatorStatus.CurrentElevatorFloor}");
+							return;
 						}
 					
-					}	
+					}
+					
 			}
+
 		}
 	}
 }
