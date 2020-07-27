@@ -6,17 +6,13 @@ namespace ElevatorSimulator
 {
 	public class StatusRandomiser : IStatusRandomiser
 	{
-		private readonly Floor _floor = new Floor();
-		private readonly Elevator _elevator = new Elevator();
+		private readonly Floor _floor;
+		private readonly Elevator _elevator;
 		Random random = new Random();
-	
-		//public StatusRamdomiser()
-		//{
-		//	//initialise base
-		//}
-		//public StatusRamdomiser(Floor floor){
-		//	_floor = floor ?? throw new ArgumentNullException("Floor can not be found");	
-		//}
+
+		public StatusRandomiser()
+		{
+		}
 
 		public int RandomiseCurrentFloor()
 		{
@@ -34,7 +30,6 @@ namespace ElevatorSimulator
 				NumberOfCurrentPeopleInElevator = random.Next(0, _elevator.WeightLimit),
 				RandomDirection = randomForDirection.ToString()
 			};
-			Console.WriteLine(elevatorStatus);
 
 		}
 	}

@@ -1,4 +1,4 @@
-﻿namespace ElevatorStimulator.Interfaces
+﻿namespace ElevatorSimulator.Interfaces
 {
 	public interface IUserStatus
 	{

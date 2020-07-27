@@ -1,8 +1,8 @@
-﻿using ElevatorSimulator.Property;
-using ElevatorStimulator.Interfaces;
+﻿using ElevatorSimulator.Interfaces;
+using ElevatorSimulator.Property;
 using System;
 
-namespace ElevatorStimulator
+namespace ElevatorSimulator
 {
 	public class UserRequest : IUserStatus
 	{

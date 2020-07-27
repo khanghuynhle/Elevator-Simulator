@@ -1,33 +1,48 @@
 ﻿using ElevatorSimulator;
+using ElevatorSimulator.Interfaces;
 using ElevatorSimulator.Property;
-using System;
-
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 namespace ElevatorStimulator
 {
 	public class Program
 	{
-		//private readonly StatusRandomiser _statusRamdomiser = new StatusRandomiser();
-		//private readonly Initialiser _initialiser;
-		//private readonly Floor _floor;
-
-		//public Program(StatusRandomiser statusRamdomiser, Initialiser initialiser)
-		//{
-		//	_statusRamdomiser = statusRamdomiser ?? throw new ArgumentNullException("Can not initialise Randomiser");
-		//	_initialiser = initialiser ?? throw new ArgumentNullException("Can not start Initialiser");
-		//}
-
-		public static void Main(string[] args)
+		static void Main(string[] args)
 		{
-			var initialiser = new Initialiser();
-			initialiser.InitialiseStatuses();
+			var services = ConfigureServices();
 
-			var status = new StatusRandomiser();
-			status.RandomisePeopleInElevatorOnARandomFloor();
+			var serviceProvider = services.BuildServiceProvider();
 
-			var floor = new Floor();
-			Console.WriteLine(floor.BuilddingFloor);
+			// calls the Run method in App, which is replacing Main
+			serviceProvider.GetService<App>().Run();
 
+		}
+		private static IServiceCollection ConfigureServices()
+		{
+			IServiceCollection services = new ServiceCollection();
+
+			var config = LoadConfiguration();
+			services.AddSingleton(config);
+
+			// required to run the application
+			services.AddTransient<IInitialiser, Initialiser>();
+			services.AddTransient<IStatusRandomiser, StatusRandomiser>();
+			services.AddTransient<IUserStatus, UserRequest>();
+
+			services.AddTransient<App>();
+
+			return services;
+		}
+
+		public static IConfiguration LoadConfiguration()
+		{
+			var builder = new ConfigurationBuilder()
+				.SetBasePath(Directory.GetCurrentDirectory())
+				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+			return builder.Build();
 		}
 	}
 }
