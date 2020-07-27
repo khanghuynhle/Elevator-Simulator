@@ -10,10 +10,14 @@ namespace ElevatorSimulator
 	{
 		private readonly Floor _floor;
 		private readonly Elevator _elevator;
+		private readonly NumberOfPeople _numberOfPeople;
 		private readonly IStatusRandomiser _statusRandomiser;
 
-		public Initialiser(IStatusRandomiser statusRandomiser)
+		public Initialiser(Elevator elevator, Floor floor, NumberOfPeople numberOfPeople, IStatusRandomiser statusRandomiser)
 		{
+			_elevator = elevator;
+			_floor = floor;
+			_numberOfPeople = numberOfPeople;
 			_statusRandomiser = statusRandomiser;
 		}
 

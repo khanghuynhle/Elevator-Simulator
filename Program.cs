@@ -30,6 +30,9 @@ namespace ElevatorStimulator
 			services.AddTransient<IInitialiser, Initialiser>();
 			services.AddTransient<IStatusRandomiser, StatusRandomiser>();
 			services.AddTransient<IUserStatus, UserRequest>();
+			services.AddSingleton<Elevator>();
+			services.AddSingleton<Floor>();
+			services.AddSingleton<NumberOfPeople>();
 
 			services.AddTransient<App>();
 

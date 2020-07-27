@@ -15,11 +15,13 @@ namespace ElevatorStimulator
 		private readonly Floor _floor;
 		private readonly Elevator _elevator;
 
-		public App(IConfiguration config, IStatusRandomiser statusRamdomiser, IInitialiser initialiser)
+		public App(IConfiguration config, IStatusRandomiser statusRamdomiser, IInitialiser initialiser, Floor floor, Elevator elevator)
 		{
 			_config = config;
 			_statusRamdomiser = statusRamdomiser;
 			_initialiser = initialiser;
+			_floor = floor;
+			_elevator = elevator;
 		}
 		public void Run()
 		{

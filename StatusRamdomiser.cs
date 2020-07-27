@@ -10,8 +10,10 @@ namespace ElevatorSimulator
 		private readonly Elevator _elevator;
 		Random random = new Random();
 
-		public StatusRandomiser()
+		public StatusRandomiser(Floor floor, Elevator elevator)
 		{
+			_floor = floor;
+			_elevator = elevator;
 		}
 
 		public int RandomiseCurrentFloor()
