@@ -5,5 +5,7 @@
 		public int BuilddingFloor { get; set; }
 		public int CurrentUserFloor { get; set; }
 		public int TargetFloor { get; set; }
+		public int NumberOfWaitingPeople { get; set; }
+
 	}
 }

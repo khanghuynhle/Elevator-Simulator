@@ -1,4 +1,4 @@
-﻿using ElevatorSimulator.Interfaces;
+﻿using ElevatorSimulator.Models;
 using ElevatorSimulator.Property;
 using Microsoft.Extensions.Configuration;
 using Serilog;
@@ -10,18 +10,18 @@ namespace ElevatorStimulator
 	{
 		private readonly IConfiguration _config;
 
-		private readonly IStatusRandomiser _statusRamdomiser;
 		private readonly IInitialiser _initialiser;
+		private readonly IUserStatus _userStatus;
 		private readonly Floor _floor;
-		private readonly Elevator _elevator;
+		private readonly IElevatorProcessing _elevatorProcessing;
 
-		public App(IConfiguration config, IStatusRandomiser statusRamdomiser, IInitialiser initialiser, Floor floor, Elevator elevator)
+		public App(IConfiguration config, IInitialiser initialiser, IUserStatus userStatus, Floor floor, IElevatorProcessing elevatorProcessing)
 		{
 			_config = config;
-			_statusRamdomiser = statusRamdomiser;
 			_initialiser = initialiser;
 			_floor = floor;
-			_elevator = elevator;
+			_userStatus = userStatus;
+			_elevatorProcessing = elevatorProcessing;
 		}
 		public void Run()
 		{
@@ -37,12 +37,13 @@ namespace ElevatorStimulator
 
 			_initialiser.InitialiseStatuses();
 
-			_statusRamdomiser.RandomisePeopleInElevatorOnARandomFloor();
+			_userStatus.RequesUserCurrentStatus();
 
-			Console.WriteLine("Number of floor is " + _floor.BuilddingFloor);
+			Console.Write("The floor number you would like to go to: ");
 
-			Console.WriteLine("Number of elevator is " + _elevator.NumberOfElevators);
+			_floor.TargetFloor = Convert.ToInt32(Console.ReadLine());
 
+			_elevatorProcessing.CallElevator();
 		}
 	}
 }

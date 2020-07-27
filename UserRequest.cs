@@ -1,4 +1,4 @@
-﻿using ElevatorSimulator.Interfaces;
+﻿using ElevatorSimulator.Models;
 using ElevatorSimulator.Property;
 using System;
 
@@ -8,32 +8,29 @@ namespace ElevatorSimulator
 	{
 		private readonly Floor _floor;
 		private readonly Elevator _elevator;
-		private readonly NumberOfPeople _numberOfPeople;
-		public UserRequest(Elevator elevator, Floor floor, NumberOfPeople numberOfPeople)
+		private readonly IStatusRandomiser _randomiser;
+		public UserRequest(Elevator elevator, Floor floor, IStatusRandomiser randomiser)
 		{
-			_elevator = elevator ?? throw new ArgumentNullException("Elevator can Not Be Found");
-			_floor = floor ?? throw new ArgumentNullException("Floor can not be found");
-			_numberOfPeople = _numberOfPeople ?? throw new ArgumentNullException("Number of people in elevator cannot be found");
+			_elevator = elevator;
+			_floor = floor;
+			_randomiser = randomiser;
 		}
-
 
 		public void RequesUserCurrentStatus()
 		{
-			Console.WriteLine("User is on floor" + _floor.CurrentUserFloor);
+			_randomiser.RandomiseCurrentFloor();
+
+			Console.WriteLine("Your are on floor " + _floor.CurrentUserFloor);
 		}
 		public void RequestElevatorStatus()
-		{ 
-			for(int i =0; i < _elevator.NumberOfElevators; i++)
-			{
-				Console.WriteLine($"There are {_elevator.NumberOfCurrentPeopleInElevator } in {_elevator.ElavatorNumber} going {_elevator.RandomDirection}");
-			}
-		}
-		public void SendUserRequest(int floor)
 		{
-			Console.WriteLine("Enter your destination: " + _floor.TargetFloor);
+				_randomiser.RandomisePeopleInElevatorAtARandomFloor();
+				_randomiser.RandomiseWaitingUserOnAFloor();
 
-			
+				foreach (Elevator elevatorStatus in _elevator.ElevatorRandomisedStatus)
+				{
+					Console.WriteLine($"There are {elevatorStatus.NumberOfCurrentPeopleInElevator} people in elevator {elevatorStatus.ElevatorNumber} going Up at floor {elevatorStatus.CurrentElevatorFloor}");
+				}
 		}
-
 	}
 }

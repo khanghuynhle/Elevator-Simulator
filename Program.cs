@@ -1,5 +1,5 @@
 ﻿using ElevatorSimulator;
-using ElevatorSimulator.Interfaces;
+using ElevatorSimulator.Models;
 using ElevatorSimulator.Property;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,9 +30,9 @@ namespace ElevatorStimulator
 			services.AddTransient<IInitialiser, Initialiser>();
 			services.AddTransient<IStatusRandomiser, StatusRandomiser>();
 			services.AddTransient<IUserStatus, UserRequest>();
+			services.AddTransient<IElevatorProcessing, ElevatorProcessing>();
 			services.AddSingleton<Elevator>();
 			services.AddSingleton<Floor>();
-			services.AddSingleton<NumberOfPeople>();
 
 			services.AddTransient<App>();
 

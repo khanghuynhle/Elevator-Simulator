@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ElevatorSimulator.Interfaces
+namespace ElevatorSimulator.Models
 {
 	public interface IInitialiser
 	{
