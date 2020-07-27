@@ -70,9 +70,12 @@ namespace ElevatorSimulator
 						}
 						else
 						{
-							elevatorFloorSorted.OrderBy(elevator => elevator.CurrentElevatorFloor);
-							Console.WriteLine($"Please go to elevator number {elevatorStatus.ElevatorNumber} which has {elevatorStatus.NumberOfCurrentPeopleInElevator} people at floor {elevatorStatus.CurrentElevatorFloor}");
-							return;
+							List<Elevator> closestElevators = elevatorFloorSorted.OrderBy(elevator => elevator.CurrentElevatorFloor).ThenBy(elevator => elevator.NumberOfCurrentPeopleInElevator).ToList();
+							foreach(Elevator elevatorSortedAvailable in closestElevators)
+							{
+								Console.WriteLine($"Please go to elevator number {elevatorSortedAvailable.ElevatorNumber} which has {elevatorSortedAvailable.NumberOfCurrentPeopleInElevator} people at floor {elevatorSortedAvailable.CurrentElevatorFloor}");
+								return;
+							}
 						}
 					
 					}
